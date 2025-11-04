@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KURKIS STUDIO</title>
+    <style>
+        /* Основные стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Навигация */
+        header {
+            padding: 20px 5%;
+            background-color: rgba(10, 10, 10, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #888;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        /* Главный экран */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: #aaa;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 3D изображение */
+        .image-3d-container {
+            margin: 40px auto;
+            width: 300px;
+            height: 300px;
+            perspective: 1000px;
+        }
+
+        .image-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s;
+            cursor: pointer;
+        }
+
+        .image-3d img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Секции */
+        section {
+            padding: 100px 5%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #fff;
+        }
+
+        /* Игры */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #444;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .game-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .game-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: transform 0.5s, filter 0.5s;
+        }
+
+        .game-card:hover .game-image img {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+        }
+
+        .game-content {
+            padding: 20px;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .game-description {
+            color: #aaa;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .download-btn:hover {
+            background: #555;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Телеграмм канал */
+        .telegram-section {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            text-align: center;
+        }
+
+        .telegram-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .telegram-link:hover {
+            transform: scale(1.05);
+            background: #555;
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Движки */
+        .engines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .engine-card {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid #444;
+        }
+
+        .engine-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .engine-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #fff;
+            filter: grayscale(100%);
+        }
+
+        .engine-name {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        /* Футер */
+        footer {
+            padding: 50px 5%;
+            background-color: #0a0a0a;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .footer-logo span {
+            color: #888;
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .games-grid, .engines-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-3d-container {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        /* Мобильное меню */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95);
+                padding: 20px;
+                display: none;
+                flex-direction: column;
+                gap: 15px;
+                border-top: 1px solid #333;
+            }
+
+            .mobile-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu a {
+                color: #ccc;
+                text-decoration: none;
+                font-size: 1.1rem;
+                padding: 10px;
+                border-bottom: 1px solid #333;
+            }
+
+            .mobile-menu a:hover {
+                color: #fff;
+            }
+        }
+
+        /* Модальное окно для загрузки */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid #444;
+        }
+
+        .modal h3 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .modal-btn.confirm {
+            background: #333;
+            color: white;
+        }
+
+        .modal-btn.confirm:hover {
+            background: #555;
+        }
+
+        .modal-btn.cancel {
+            background: #555;
+            color: white;
+        }
+
+        .modal-btn.cancel:hover {
+            background: #777;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <header>
+        <nav>
+            <a href="#" class="logo">KURKIS <span>STUDIO</span></a>
+            <div class="nav-links">
+                <a href="#games">Игры</a>
+                <a href="#telegram">Телеграмм канал</a>
+                <a href="#engines">Мои движки</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+        <div class="mobile-menu">
+            <a href="#games">Игры</a>
+            <a href="#telegram">Телеграмм канал</a>
+            <a href="#engines">Мои движки</a>
+        </div>
+    </header>
+
+    <!-- Главный экран -->
+    <section class="hero">
+        <h1>KURKIS STUDIO</h1>
+        <p>Создаем уникальные игровые впечатления с 2023 года</p>
+        
+        <!-- 3D изображение -->
+        <div class="image-3d-container">
+            <div class="image-3d" id="rotatingImage">
+                <img src="https://i-mg24.ru/images/110425172251-idb72.png" alt="KURKIS STUDIO">
+            </div>
+        </div>
+    </section>
+
+    <!-- Игры -->
+    <section id="games">
+        <h2 class="section-title">Игры</h2>
+        <div class="games-grid">
+            <!-- Симулятор Домофона 1 -->
+            <div class="game-card">
+                <div class="game-image">
+                    <img src="https://i-mg24.ru/images/110425171509-zmt7i.png" alt="Симулятор Домофона 1">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Симулятор Домофона 1</h3>
+                    <p class="game-description">Это игра про простые звонки в домофон, и бабки которые спорят 24/7..</p>
+                    <button class="download-btn" data-game="Симулятор Домофона 1" data-file="simulator_domofona_1.zip">Скачать Игру</button>
+                </div>
+            </div>
+
+            <!-- Симулятор домофона Winter Edition -->
+            <div class="game-card">
+                <div class="game-image">
+                    <img src="https://i-mg24.ru/images/110425171509-zmt7i.png" alt="Симулятор домофона Winter Edition">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Симулятор домофона Winter Edition</h3>
+                    <p class="game-description">Обновленная версия игры Симулятор домофона но в ней больше механик и плюшек!</p>
+                    <button class="download-btn" data-game="Симулятор домофона Winter Edition" data-file="simulator_domofona_winter.zip">Скачать Игру</button>
+                </div>
+            </div>
+
+            <!-- Alice Doorway to Nowhere -->
+            <div class="game-card">
+                <div class="game-image">
+                    <img src="https://i-mg24.ru/images/110425171640-r6g1p.png" alt="Alice Doorway to Nowhere">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Alice Doorway to Nowhere</h3>
+                    <p class="game-description">А ты попробуй убеги от этой вредной кошки..</p>
+                    <button class="download-btn" data-game="Alice Doorway to Nowhere" data-file="alice_doorway.zip">Скачать Игру</button>
+                </div>
+            </div>
+
+            <!-- Alice The Horrible Escape -->
+            <div class="game-card">
+                <div class="game-image">
+                    <img src="https://i-mg24.ru/images/110425171733-rkzxi.png" alt="Alice The Horrible Escape">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Alice The Horrible Escape</h3>
+                    <p class="game-description">Все же попробуй убеги от этой вредной круглой кошки...</p>
+                    <button class="download-btn" data-game="Alice The Horrible Escape" data-file="alice_horrible_escape.zip">Скачать Игру</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Телеграмм канал -->
+    <section id="telegram" class="telegram-section">
+        <h2 class="section-title">Телеграмм канал</h2>
+        <p>Подписывайтесь на наш телеграмм канал, чтобы быть в курсе всех новостей и обновлений!</p>
+        <a href="https://t.me/Kurkis_Games" target="_blank" class="telegram-link">
+            <span>📢</span> Перейти в канал
+        </a>
+    </section>
+
+    <!-- Мои движки -->
+    <section id="engines">
+        <h2 class="section-title">Мои движки</h2>
+        <div class="engines-grid">
+            <div class="engine-card">
+                <div class="engine-icon">⚙️</div>
+                <h3 class="engine-name">Unity</h3>
+                <p>Мощный движок для создания 2D и 3D игр</p>
+            </div>
+            <div class="engine-card">
+                <div class="engine-icon">🎮</div>
+                <h3 class="engine-name">Roblox Studio</h3>
+                <p>Платформа для создания и публикации игр в Roblox</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-logo">KURKIS <span>STUDIO</span></div>
+        <p class="copyright">© 2023 KURKIS STUDIO. Все права защищены.</p>
+    </footer>
+
+    <!-- Модальное окно для загрузки -->
+    <div class="modal" id="downloadModal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Началось скачивание игры</h3>
+            <p id="modalMessage">Пожалуйста, укажите, куда сохранить файл игры.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn confirm" id="confirmDownload">OK</button>
+                <button class="modal-btn cancel" id="cancelDownload">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Мобильное меню
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Закрытие меню при клике на ссылку
+        const mobileLinks = document.querySelectorAll('.mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 3D эффект для изображения
+        const rotatingImage = document.getElementById('rotatingImage');
+        
+        rotatingImage.addEventListener('mousemove', (e) => {
+            const rect = rotatingImage.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateY = (x - centerX) / 10;
+            const rotateX = (centerY - y) / 10;
+            
+            rotatingImage.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+        });
+        
+        rotatingImage.addEventListener('mouseleave', () => {
+            rotatingImage.style.transform = 'rotateY(0deg) rotateX(0deg)';
+            rotatingImage.style.transition = 'transform 0.5s ease';
+        });
+        
+        rotatingImage.addEventListener('mouseenter', () => {
+            rotatingImage.style.transition = 'transform 0.1s ease';
+        });
+
+        // Модальное окно для загрузки
+        const modal = document.getElementById('downloadModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+        const confirmDownload = document.getElementById('confirmDownload');
+        const cancelDownload = document.getElementById('cancelDownload');
+
+        let currentDownload = null;
+
+        // Функция для скачивания игры
+        document.querySelectorAll('.download-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const gameName = this.getAttribute('data-game');
+                const fileName = this.getAttribute('data-file');
+                
+                currentDownload = {
+                    name: gameName,
+                    file: fileName
+                };
+                
+                modalTitle.textContent = `Скачивание "${gameName}"`;
+                modalMessage.textContent = 'Началось скачивание игры. Пожалуйста, укажите, куда сохранить файл игры.';
+                modal.style.display = 'flex';
+            });
+        });
+
+        // Подтверждение загрузки
+        confirmDownload.addEventListener('click', function() {
+            if (currentDownload) {
+                // Создаем временную ссылку для загрузки
+                const link = document.createElement('a');
+                link.href = `games/${currentDownload.file}`; // Путь к файлу игры
+                link.download = currentDownload.file;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                modal.style.display = 'none';
+                currentDownload = null;
+            }
+        });
+
+        // Отмена загрузки
+        cancelDownload.addEventListener('click', function() {
+            modal.style.display = 'none';
+            currentDownload = null;
+        });
+
+        // Закрытие модального окна при клике вне его
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                currentDownload = null;
+            }
+        });
+    </script>
+</body>
+</html>
