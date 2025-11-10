@@ -202,6 +202,18 @@
             box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
         }
 
+        .soon-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #666;
+            color: #ccc;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: not-allowed;
+            font-size: 0.9rem;
+        }
+
         /* Телеграмм канал */
         .telegram-section {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
@@ -411,6 +423,13 @@
         .modal-btn.cancel:hover {
             background: #777;
         }
+
+        /* Стиль для текста "Soon..." */
+        .soon-text {
+            color: #888;
+            font-style: italic;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -487,6 +506,19 @@
                     <h3 class="game-title">Alice The Horrible Escape</h3>
                     <p class="game-description">Все же попробуй убеги от этой вредной круглой кошки...</p>
                     <button class="download-btn" data-game="Alice The Horrible Escape" data-file="alice_horrible_escape">Скачать Игру</button>
+                </div>
+            </div>
+
+            <!-- Побег из магнита -->
+            <div class="game-card">
+                <div class="game-image">
+                    <img src="https://avatars.mds.yandex.net/i?id=b5b1e6cf1c7ddabd25b031b09042d520d179ecdd-5665039-images-thumbs&n=13" alt="Побег из магнита">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Побег из магнита</h3>
+                    <p class="game-description">Сможешь ли ты сбежать из самого загадочного магазина?</p>
+                    <button class="soon-btn">Скачать Игру</button>
+                    <p class="soon-text">Soon...</p>
                 </div>
             </div>
         </div>
@@ -624,6 +656,13 @@
                 modal.style.display = 'none';
                 currentDownload = null;
             }
+        });
+
+        // Обработка кнопки "Soon..." для Побег из магнита
+        document.querySelectorAll('.soon-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Игра "Побег из магнита" скоро будет доступна для скачивания!');
+            });
         });
     </script>
 </body>
