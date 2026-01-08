@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KURKIS STUDIO</title>
+    <title>KS STUDIO</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -13,289 +13,155 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        :root {
-            --primary: #ffffff;
-            --secondary: #000000;
-            --accent: #888888;
-            --bg: #0a0a0a;
-            --card-bg: rgba(30, 30, 30, 0.8);
-        }
-
         body {
-            background-color: var(--bg);
-            color: var(--primary);
-            overflow-x: hidden;
-            line-height: 1.6;
+            background-color: #000;
+            color: #fff;
+            min-height: 100vh;
+            background-image: url('https://i-mg24.ru/images/010826165308-nz0yv.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
         }
 
-        /* 3D Canvas Background */
-        #bg-canvas {
-            position: fixed;
+        body::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
             z-index: -1;
-            opacity: 0.7;
         }
 
-        /* Navigation */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 5%;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
         }
 
-        nav {
+        .social-top {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0 40px;
+        }
+
+        .social-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .telegram-icon {
+            background: linear-gradient(135deg, #0088cc, #005f8a);
+            color: white;
+        }
+
+        .github-icon {
+            background: linear-gradient(135deg, #333, #000);
+            color: white;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 150, 255, 0.4);
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0 40px;
+            margin-bottom: 30px;
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--primary);
-            text-decoration: none;
+            font-size: 4.5rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            margin-bottom: 15px;
+            font-family: 'Arial Black', sans-serif;
             position: relative;
-            overflow: hidden;
+            display: inline-block;
         }
 
         .logo::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
             width: 100%;
-            height: 2px;
-            background: var(--primary);
-            transform: translateX(-100%);
-            transition: transform 0.5s ease;
-        }
-
-        .logo:hover::after {
-            transform: translateX(0);
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-        }
-
-        .nav-links a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            padding: 5px 0;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            bottom: -10px;
             left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .tagline {
+            font-size: 1.3rem;
+            color: #aaa;
+            margin-top: 25px;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 5%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: 5rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero h1::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: translateX(-100%);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-bottom: 40px;
-        }
-
-        /* 3D Floating Elements */
-        .floating-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .floating-element {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            animation: float 20s infinite linear;
-            transform-style: preserve-3d;
-        }
-
-        .floating-element:nth-child(1) {
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-            animation-duration: 25s;
-        }
-
-        .floating-element:nth-child(2) {
-            top: 60%;
-            left: 80%;
-            animation-delay: -5s;
-            animation-duration: 30s;
-        }
-
-        .floating-element:nth-child(3) {
-            top: 80%;
-            left: 20%;
-            animation-delay: -10s;
-            animation-duration: 35s;
-        }
-
-        .floating-element:nth-child(4) {
-            top: 40%;
-            left: 70%;
-            animation-delay: -15s;
-            animation-duration: 40s;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg) translateZ(0);
-            }
-            25% {
-                transform: translateY(-20px) rotate(90deg) translateZ(20px);
-            }
-            50% {
-                transform: translateY(0) rotate(180deg) translateZ(0);
-            }
-            75% {
-                transform: translateY(20px) rotate(270deg) translateZ(-20px);
-            }
-            100% {
-                transform: translateY(0) rotate(360deg) translateZ(0);
-            }
-        }
-
-        /* Sections */
-        section {
-            padding: 100px 5%;
-            position: relative;
+        .games-section {
+            margin-bottom: 50px;
         }
 
         .section-title {
-            font-size: 3rem;
+            font-size: 2.2rem;
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 40px;
+            color: #fff;
             position: relative;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-weight: 600;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
             width: 100px;
             height: 3px;
-            background: var(--primary);
+            background: #fff;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        /* Games Grid */
-        .games-grid {
+        .games-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 40px;
-            perspective: 1000px;
+            gap: 30px;
         }
 
         .game-card {
-            background: var(--card-bg);
-            border-radius: 15px;
+            background-color: rgba(20, 20, 20, 0.95);
+            border-radius: 12px;
             overflow: hidden;
-            transition: all 0.5s ease;
+            transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            transform-style: preserve-3d;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .game-card:hover {
-            transform: translateY(-20px) rotateX(5deg) rotateY(5deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .game-image {
-            height: 250px;
+            width: 100%;
+            height: 200px;
             overflow: hidden;
             position: relative;
         }
@@ -304,692 +170,305 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(100%);
-            transition: all 0.5s ease;
+            transition: transform 0.5s ease;
         }
 
         .game-card:hover .game-image img {
-            filter: grayscale(0%);
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .game-content {
             padding: 25px;
-            position: relative;
-            z-index: 2;
         }
 
         .game-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
+            color: #fff;
             margin-bottom: 15px;
-            color: var(--primary);
+            font-weight: 600;
+            border-left: 4px solid #fff;
+            padding-left: 12px;
         }
 
         .game-description {
-            color: var(--accent);
-            margin-bottom: 20px;
+            color: #ccc;
+            line-height: 1.6;
             font-size: 1rem;
+            margin-bottom: 20px;
+            min-height: 80px;
         }
 
-        .download-btn {
-            display: inline-block;
-            padding: 12px 25px;
-            border-radius: 5px;
+        /* Черно-белая кнопка */
+        .game-buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #333, #000);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            position: relative;
-            overflow: hidden;
-            background: var(--primary);
-            color: var(--secondary);
-        }
-
-        .download-btn:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-        }
-
-        /* Telegram Section */
-        .telegram-section {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 20px;
-            padding: 80px 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .telegram-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
-        }
-
-        .telegram-link {
             display: inline-flex;
             align-items: center;
-            gap: 15px;
-            padding: 18px 35px;
-            background: var(--primary);
-            color: var(--secondary);
-            text-decoration: none;
-            border-radius: 10px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .telegram-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .telegram-link:hover::before {
-            left: 100%;
-        }
-
-        .telegram-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
-        }
-
-        /* Engines Section */
-        .engines-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 40px;
-        }
-
-        .engine-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 40px 30px;
-            text-align: center;
-            transition: all 0.5s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .engine-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .engine-card:hover::before {
-            transform: translateX(100%);
-        }
-
-        .engine-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .engine-icon {
-            font-size: 4rem;
-            margin-bottom: 25px;
-            color: var(--primary);
-            filter: grayscale(100%);
-            transition: all 0.5s ease;
-        }
-
-        .engine-card:hover .engine-icon {
-            filter: grayscale(0%);
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .engine-name {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        /* Footer */
-        footer {
-            padding: 60px 5%;
-            background: rgba(0, 0, 0, 0.8);
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-logo {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .footer-logo span {
-            color: var(--accent);
-        }
-
-        .copyright {
-            color: var(--accent);
-            font-size: 1rem;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
             justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            transform: scale(0.9);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .modal.active .modal-content {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .modal h3 {
-            margin-bottom: 20px;
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
-
-        .modal-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .modal-btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
+            gap: 10px;
+            border: 2px solid #666;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            max-width: 300px;
         }
 
-        .modal-btn.confirm {
-            background: var(--primary);
-            color: var(--secondary);
-        }
-
-        .modal-btn.confirm:hover {
-            background: var(--accent);
+        .btn-download:hover {
+            background: linear-gradient(135deg, #444, #111);
             transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(255, 255, 255, 0.1);
+            border-color: #fff;
         }
 
-        .modal-btn.cancel {
-            background: var(--accent);
-            color: var(--primary);
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+            font-size: 0.9rem;
         }
 
-        .modal-btn.cancel:hover {
-            background: #666;
-            transform: translateY(-3px);
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero h1 {
+            .logo {
                 font-size: 3rem;
             }
-
-            .hero p {
-                font-size: 1.2rem;
+            
+            .social-top {
+                gap: 30px;
             }
-
-            .section-title {
-                font-size: 2.2rem;
+            
+            .social-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
             }
-
-            .games-grid, .engines-grid {
+            
+            .games-container {
                 grid-template-columns: 1fr;
             }
+            
+            .game-image {
+                height: 180px;
+            }
+            
+            .game-content {
+                padding: 20px;
+            }
+            
+            .btn-download {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
         }
 
-        /* Mobile Menu */
-        .mobile-menu {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            padding: 20px;
-            display: none;
-            flex-direction: column;
-            gap: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            z-index: 999;
-        }
-
-        .mobile-menu.active {
-            display: flex;
-        }
-
-        .mobile-menu a {
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu a:hover {
-            background: rgba(255, 255, 255, 0.05);
-            padding-left: 25px;
-        }
-
-        /* Fade In Animation on Scroll */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* 3D Text Effect */
-        .text-3d {
-            text-shadow: 
-                0 1px 0 #ccc, 
-                0 2px 0 #c9c9c9,
-                0 3px 0 #bbb,
-                0 4px 0 #b9b9b9,
-                0 5px 0 #aaa,
-                0 6px 1px rgba(0,0,0,.1),
-                0 0 5px rgba(0,0,0,.1),
-                0 1px 3px rgba(0,0,0,.3),
-                0 3px 5px rgba(0,0,0,.2),
-                0 5px 10px rgba(0,0,0,.25),
-                0 10px 10px rgba(0,0,0,.2),
-                0 20px 20px rgba(0,0,0,.15);
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .game-title {
+                font-size: 1.4rem;
+            }
+            
+            .social-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
+            }
+            
+            .game-image {
+                height: 150px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 3D Background Canvas -->
-    <canvas id="bg-canvas"></canvas>
-
-    <!-- Navigation -->
-    <header>
-        <nav>
-            <a href="#" class="logo">KURKIS <span>STUDIO</span></a>
-            <div class="nav-links">
-                <a href="#games">Игры</a>
-                <a href="#telegram">Телеграмм</a>
-                <a href="#engines">Движки</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </nav>
-        <div class="mobile-menu">
-            <a href="#games">Игры</a>
-            <a href="#telegram">Телеграмм</a>
-            <a href="#engines">Движки</a>
+    <div class="container">
+        <div class="social-top">
+            <a href="https://t.me/KSstudio2" class="social-icon telegram-icon" target="_blank" title="Telegram">
+                <i class="fab fa-telegram"></i>
+            </a>
+            <a href="https://github.com/ksstudio2" class="social-icon github-icon" target="_blank" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="floating-elements">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-        </div>
-        <div class="hero-content">
-            <h1 class="text-3d">KURKIS STUDIO</h1>
-            <p>делаю игры в одиночку.</p>
-        </div>
-    </section>
-
-    <!-- Games Section -->
-    <section id="games">
-        <h2 class="section-title fade-in">Игры</h2>
-        <div class="games-grid">
-            <!-- Симулятор Домофона 1 -->
-            <div class="game-card fade-in">
-                <div class="game-image">
-                    <img src="https://i-mg24.ru/images/110425171509-zmt7i.png" alt="Симулятор Домофона 1">
+        
+        <header>
+            <h1 class="logo">KS STUDIO</h1>
+            <p class="tagline">Игровая студия | Создаем уникальные игры</p>
+        </header>
+        
+        <main>
+            <section class="games-section">
+                <h2 class="section-title">Наши Игры</h2>
+                
+                <div class="games-container">
+                    <!-- Игра 1: Симулятор Домофона Winter Edition -->
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="https://iili.io/fehQmpp.png" alt="Симулятор Домофона Winter Edition">
+                        </div>
+                        <div class="game-content">
+                            <h3 class="game-title">Симулятор Домофона Winter Edition</h3>
+                            <p class="game-description">
+                                Обновленная зимняя версия игры с новыми механиками и праздничной атмосферой.
+                            </p>
+                            <div class="game-buttons">
+                                <button class="btn-download" onclick="downloadGame('simulator_domofona_winter')">
+                                    <i class="fas fa-download"></i> Скачать игру
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Игра 2: Симулятор Домофона -->
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="https://iili.io/fehbXcu.png" alt="Симулятор Домофона">
+                        </div>
+                        <div class="game-content">
+                            <h3 class="game-title">Симулятор Домофона</h3>
+                            <p class="game-description">
+                                Классический симулятор звонков в домофон с забавными персонажами и ситуациями.
+                            </p>
+                            <div class="game-buttons">
+                                <button class="btn-download" onclick="downloadGame('simulator_domofona_1')">
+                                    <i class="fas fa-download"></i> Скачать игру
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Игра 3: Alice The Horrible Escape -->
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="https://iili.io/fehy5cF.png" alt="Alice The Horrible Escape">
+                        </div>
+                        <div class="game-content">
+                            <h3 class="game-title">Alice The Horrible Escape</h3>
+                            <p class="game-description">
+                                Хоррор-платформер с пугающей кошкой Алисой. Решайте головоломки и убегайте!
+                            </p>
+                            <div class="game-buttons">
+                                <button class="btn-download" onclick="downloadGame('alice_horrible_escape')">
+                                    <i class="fas fa-download"></i> Скачать игру
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Игра 4: Alice Doorway to Nowhere -->
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="https://iili.io/fej9jqB.png" alt="Alice Doorway to Nowhere">
+                        </div>
+                        <div class="game-content">
+                            <h3 class="game-title">Alice Doorway to Nowhere</h3>
+                            <p class="game-description">
+                                Продолжение хоррора с кошкой Алисой. Новые локации и еще более страшная атмосфера.
+                            </p>
+                            <div class="game-buttons">
+                                <button class="btn-download" onclick="downloadGame('alice_doorway')">
+                                    <i class="fas fa-download"></i> Скачать игру
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="game-content">
-                    <h3 class="game-title">Симулятор Домофона 1</h3>
-                    <p class="game-description">Это игра про простые звонки в домофон, и бабки которые спорят 24/7..</p>
-                    <button class="download-btn" data-game="Симулятор Домофона 1" data-file="simulator_domofona_1">Скачать Игру</button>
-                </div>
-            </div>
-
-            <!-- Симулятор домофона Winter Edition -->
-            <div class="game-card fade-in">
-                <div class="game-image">
-                    <img src="https://i-mg24.ru/images/110825233304-bf9p1.png" alt="Симулятор домофона Winter Edition">
-                </div>
-                <div class="game-content">
-                    <h3 class="game-title">Симулятор домофона Winter Edition</h3>
-                    <p class="game-description">Обновленная версия игры Симулятор домофона но в ней больше механик и плюшек!</p>
-                    <button class="download-btn" data-game="Симулятор домофона Winter Edition" data-file="simulator_domofona_winter">Скачать Игру</button>
-                </div>
-            </div>
-
-            <!-- Alice Doorway to Nowhere -->
-            <div class="game-card fade-in">
-                <div class="game-image">
-                    <img src="https://i-mg24.ru/images/110425171640-r6g1p.png" alt="Alice Doorway to Nowhere">
-                </div>
-                <div class="game-content">
-                    <h3 class="game-title">Alice Doorway to Nowhere</h3>
-                    <p class="game-description">А ты попробуй убеги от этой вредной кошки..</p>
-                    <button class="download-btn" data-game="Alice Doorway to Nowhere" data-file="alice_doorway">Скачать Игру</button>
-                </div>
-            </div>
-
-            <!-- Alice The Horrible Escape -->
-            <div class="game-card fade-in">
-                <div class="game-image">
-                    <img src="https://i-mg24.ru/images/110425171733-rkzxi.png" alt="Alice The Horrible Escape">
-                </div>
-                <div class="game-content">
-                    <h3 class="game-title">Alice The Horrible Escape</h3>
-                    <p class="game-description">Все же попробуй убеги от этой вредной круглой кошки...</p>
-                    <button class="download-btn" data-game="Alice The Horrible Escape" data-file="alice_horrible_escape">Скачать Игру</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Telegram Section -->
-    <section id="telegram" class="telegram-section fade-in">
-        <h2 class="section-title">Телеграмм канал</h2>
-        <p>Подписывайтесь на наш телеграмм канал, чтобы быть в курсе всех новостей и обновлений!</p>
-        <a href="https://t.me/Kurkis_Games" target="_blank" class="telegram-link">
-            <i class="fab fa-telegram"></i>
-            <span>Перейти в канал</span>
-        </a>
-    </section>
-
-    <!-- Engines Section -->
-    <section id="engines">
-        <h2 class="section-title fade-in">Мои движки</h2>
-        <div class="engines-grid">
-            <div class="engine-card fade-in">
-                <div class="engine-icon">⚙️</div>
-                <h3 class="engine-name">Unity</h3>
-                <p>Мощный движок для создания 2D и 3D игр</p>
-            </div>
-            <div class="engine-card fade-in">
-                <div class="engine-icon">🎮</div>
-                <h3 class="engine-name">Roblox Studio</h3>
-                <p>Платформа для создания и публикации игр в Roblox</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-logo">KURKIS <span>STUDIO</span></div>
-        <p class="copyright">Nya <3</p>
-    </footer>
-
-    <!-- Modal -->
-    <div class="modal" id="downloadModal">
-        <div class="modal-content">
-            <h3 id="modalTitle">Началось скачивание игры</h3>
-            <p id="modalMessage">Пожалуйста, укажите, куда сохранить файл игры.</p>
-            <div class="modal-buttons">
-                <button class="modal-btn confirm" id="confirmDownload">OK</button>
-                <button class="modal-btn cancel" id="cancelDownload">Отмена</button>
-            </div>
-        </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>© 2024 KS STUDIO. Все права защищены.</p>
+            <p>Свяжитесь с нами: ksenia@ksstudio.ru</p>
+        </footer>
     </div>
 
     <script>
-        // 3D Background Animation
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        const particles = [];
-        const particleCount = 100;
-        
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-                this.color = `rgba(255, 255, 255, ${Math.random() * 0.5})`;
-            }
-            
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-            }
-            
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-        
-        function initParticles() {
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-        
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < 100) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance/100)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            
-            requestAnimationFrame(animateParticles);
-        }
-        
-        initParticles();
-        animateParticles();
-        
-        // Mobile Menu
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
-        
-        // Close mobile menu when clicking on a link
-        const mobileLinks = document.querySelectorAll('.mobile-menu a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-            });
-        });
-        
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Fade In Animation on Scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const fadeInOnScroll = () => {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
-        };
-        
-        window.addEventListener('scroll', fadeInOnScroll);
-        fadeInOnScroll(); // Check on load
-        
-        // Modal
-        const modal = document.getElementById('downloadModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalMessage = document.getElementById('modalMessage');
-        const confirmDownload = document.getElementById('confirmDownload');
-        const cancelDownload = document.getElementById('cancelDownload');
-        
-        let currentDownload = null;
-        
-        // Game download functionality
-        const driveLinks = {
+        // Ссылки для скачивания игр
+        const gameLinks = {
             'simulator_domofona_1': 'https://drive.google.com/uc?export=download&id=1h6ba71qIVAsHBRRYM-_uMw9GtkNXBFN3',
             'simulator_domofona_winter': 'https://drive.google.com/uc?export=download&id=1OP4Ovi73gT1dThY13ntHqSbMk85VxRFh',
             'alice_doorway': 'https://drive.google.com/uc?export=download&id=1dutgseD1UzyI8vYEWYyDgljAO6BnCsco',
             'alice_horrible_escape': 'https://drive.google.com/uc?export=download&id=1QtJdZ4eH-UyraAO-FTPV3FKqkZws609e'
         };
-        
-        // Download buttons functionality
-        document.querySelectorAll('.download-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const gameName = this.getAttribute('data-game');
-                const fileKey = this.getAttribute('data-file');
+
+        // Функция для скачивания игры
+function downloadGame(gameKey) {
+    if (gameLinks[gameKey]) {
+        // Ссылка открывается сразу без инструкций и вопросов
+        window.open(gameLinks[gameKey], '_blank');
+    } else {
+        alert("Ошибка: ссылка для скачивания не найдена!");
+    }
+}
+
+
+        // Анимация для элементов при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            // Анимация для социальных иконок
+            const socialIcons = document.querySelectorAll('.social-icon');
+            socialIcons.forEach((icon, index) => {
+                icon.style.opacity = '0';
+                icon.style.transform = 'translateY(20px)';
                 
-                currentDownload = {
-                    name: gameName,
-                    file: fileKey
-                };
-                
-                modalTitle.textContent = `Скачивание "${gameName}"`;
-                modalMessage.textContent = 'Началось скачивание игры. Пожалуйста, укажите, куда сохранить файл игры.';
-                modal.style.display = 'flex';
                 setTimeout(() => {
-                    modal.classList.add('active');
-                }, 10);
+                    icon.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    icon.style.opacity = '1';
+                    icon.style.transform = 'translateY(0)';
+                }, 300 + index * 200);
             });
-        });
-        
-        // Confirm download
-        confirmDownload.addEventListener('click', function() {
-            if (currentDownload && driveLinks[currentDownload.file]) {
-                // Открываем ссылку на Google Drive в новом окне
-                window.open(driveLinks[currentDownload.file], '_blank');
-                
-                modal.classList.remove('active');
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                }, 300);
-                currentDownload = null;
-            }
-        });
-        
-        // Cancel download
-        cancelDownload.addEventListener('click', function() {
-            modal.classList.remove('active');
+            
+            // Анимация для логотипа
+            const logo = document.querySelector('.logo');
+            logo.style.opacity = '0';
+            
             setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-            currentDownload = null;
-        });
-        
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                modal.classList.remove('active');
+                logo.style.transition = 'opacity 1s ease';
+                logo.style.opacity = '1';
+            }, 500);
+            
+            // Анимация для карточек игр
+            const gameCards = document.querySelectorAll('.game-card');
+            
+            gameCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
                 setTimeout(() => {
-                    modal.style.display = 'none';
-                }, 300);
-                currentDownload = null;
-            }
-        });
-        
-        // Resize canvas on window resize
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 700 + index * 150);
+            });
+            
+            // Добавляем обработчики для кнопок
+            const downloadButtons = document.querySelectorAll('.btn-download');
+            downloadButtons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
         });
     </script>
 </body>
