@@ -389,6 +389,24 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Игра 5: THE ZABROSHKA (НОВАЯ ИГРА) -->
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="https://iili.io/feS17fI.th.png" alt="THE ZABROSHKA">
+                        </div>
+                        <div class="game-content">
+                            <h3 class="game-title">THE ZABROSHKA</h3>
+                            <p class="game-description">
+                                Вы оказываетесь в темном заброшенном здании, цель: собрать 3 дерева и 3 батарейки, активировать щиток и сбежать.
+                            </p>
+                            <div class="game-buttons">
+                                <button class="btn-download" onclick="downloadGame('zabroshka')">
+                                    <i class="fas fa-download"></i> Скачать игру
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
@@ -405,19 +423,22 @@
             'simulator_domofona_1': 'https://drive.google.com/uc?export=download&id=1h6ba71qIVAsHBRRYM-_uMw9GtkNXBFN3',
             'simulator_domofona_winter': 'https://drive.google.com/uc?export=download&id=1OP4Ovi73gT1dThY13ntHqSbMk85VxRFh',
             'alice_doorway': 'https://drive.google.com/uc?export=download&id=1dutgseD1UzyI8vYEWYyDgljAO6BnCsco',
-            'alice_horrible_escape': 'https://drive.google.com/uc?export=download&id=1QtJdZ4eH-UyraAO-FTPV3FKqkZws609e'
+            'alice_horrible_escape': 'https://drive.google.com/uc?export=download&id=1QtJdZ4eH-UyraAO-FTPV3FKqkZws609e',
+            'zabroshka': 'https://drive.google.com/file/d/1EqBkagNPAVcwXdjb8ZnMt3BaSbsmrKVH/view?usp=sharing'  // Замените '#' на реальную ссылку для скачивания
         };
 
         // Функция для скачивания игры
-function downloadGame(gameKey) {
-    if (gameLinks[gameKey]) {
-        // Ссылка открывается сразу без инструкций и вопросов
-        window.open(gameLinks[gameKey], '_blank');
-    } else {
-        alert("Ошибка: ссылка для скачивания не найдена!");
-    }
-}
-
+        function downloadGame(gameKey) {
+            if (gameLinks[gameKey]) {
+                if (gameLinks[gameKey] === '#') {
+                    alert("Ссылка для скачивания игры THE ZABROSHKA скоро появится!");
+                    return;
+                }
+                window.open(gameLinks[gameKey], '_blank');
+            } else {
+                alert("Ошибка: ссылка для скачивания не найдена!");
+            }
+        }
 
         // Анимация для элементов при загрузке
         document.addEventListener('DOMContentLoaded', function() {
